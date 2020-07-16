@@ -13,174 +13,222 @@
     sound: new Howl({
       src: ['sounds/bubbles.mp3']
     }),
-    color: '#1abc9c'
+    color: '#1abc9c',
+    image: 'circle'
     },
     w: {
     sound: new Howl({
       src: ['sounds/clay.mp3']
     }),
-    color: '#2ecc71'
+    color: '#2ecc71',
+    image: 'circle'
     },
     e: {
     sound: new Howl({
       src: ['sounds/confetti.mp3']
     }),
-    color: '#3498db'
+    color: '#3498db',
+    image: 'circle'
     },
     r: {
     sound: new Howl({
       src: ['sounds/corona.mp3']
     }),
-    color: '#9b59b6'
+    color: '#9b59b6',
+    image: 'circle'
     },
     t: {
     sound: new Howl({
       src: ['sounds/dotted-spiral.mp3']
     }),
-    color: '#34495e'
+    color: '#34495e',
+    image: 'circle'
     },
     y: {
     sound: new Howl({
       src: ['sounds/flash-1.mp3']
     }),
-    color: '#16a085'
+    color: '#16a085',
+    image: 'circle'
     },
     u: {
     sound: new Howl({
       src: ['sounds/flash-2.mp3']
     }),
-    color: '#27ae60'
+    color: '#27ae60',
+    image: 'circle'
     },
     i: {
     sound: new Howl({
       src: ['sounds/flash-3.mp3']
     }),
-    color: '#2980b9'
+    color: '#2980b9',
+    image: 'circle'
     },
     o: {
     sound: new Howl({
     src: ['sounds/glimmer.mp3']
     }),
-    color: '#8e44ad'
+    color: '#8e44ad',
+    image: 'circle'
     },
     p: {
     sound: new Howl({
       src: ['sounds/moon.mp3']
     }),
-    color: '#2c3e50'
+    color: '#2c3e50',
+    image: 'circle'
     },
     a: {
     sound: new Howl({
       src: ['sounds/pinwheel.mp3']
     }),
-    color: '#f1c40f'
+    color: '#f1c40f',
+    image: 'circle'
     },
     s: {
     sound: new Howl({
       src: ['sounds/piston-1.mp3']
     }),
-    color: '#e67e22'
+    color: '#e67e22',
+    image: 'circle'
     },
     d: {
     sound: new Howl({
       src: ['sounds/piston-2.mp3']
     }),
-    color: '#e74c3c'
+    color: '#e74c3c',
+    image: 'line'
     },
     f: {
     sound: new Howl({
       src: ['sounds/prism-1.mp3']
     }),
-    color: '#95a5a6'
+    color: '#95a5a6',
+    image: 'circle'
     },
     g: {
     sound: new Howl({
       src: ['sounds/prism-2.mp3']
     }),
-    color: '#f39c12'
+    color: '#f39c12',
+    image: 'circle'
     },
     h: {
     sound: new Howl({
       src: ['sounds/prism-3.mp3']
     }),
-    color: '#d35400'
+    color: '#d35400',
+    image: 'circle'
     },
     j: {
     sound: new Howl({
       src: ['sounds/splits.mp3']
     }),
-    color: '#1abc9c'
+    color: '#1abc9c',
+    image: 'circle'
     },
     k: {
     sound: new Howl({
       src: ['sounds/squiggle.mp3']
     }),
-    color: '#2ecc71'
+    color: '#2ecc71',
+    image: 'circle'
     },
     l: {
     sound: new Howl({
       src: ['sounds/strike.mp3']
     }),
-    color: '#3498db'
+    color: '#3498db',
+    image: 'circle'
     },
     z: {
     sound: new Howl({
       src: ['sounds/suspension.mp3']
     }),
-    color: '#9b59b6'
+    color: '#9b59b6',
+    image: 'circle'
     },
     x: {
     sound: new Howl({
       src: ['sounds/timer.mp3']
     }),
-    color: '#34495e'
+    color: '#34495e',
+    image: 'circle'
     },
     c: {
     sound: new Howl({
       src: ['sounds/ufo.mp3']
     }),
-    color: '#16a085'
+    color: '#16a085',
+    image: 'circle'
     },
     v: {
     sound: new Howl({
       src: ['sounds/veil.mp3']
     }),
-    color: '#27ae60'
+    color: '#27ae60',
+    image: 'circle'
     },
     b: {
     sound: new Howl({
       src: ['sounds/wipe.mp3']
     }),
-    color: '#2980b9'
+    color: '#2980b9',
+    image: 'circle'
     },
     n: {
     sound: new Howl({
     src: ['sounds/zig-zag.mp3']
     }),
-    color: '#8e44ad'
+    color: '#8e44ad',
+    image: 'circle'
     },
     m: {
     sound: new Howl({
       src: ['sounds/moon.mp3']
     }),
-    color: '#2c3e50'
+    color: '#2c3e50',
+    image: 'circle'
     }
   }
 
   var circles = [];
+  var vertices = [];
 
   function onKeyDown(event) {
     if(keyData[event.key]){
-      keyData[event.key].sound.play();
-      var maxPoint = new Point(view.size.width, view.size.height);
-      var randomPoint = Point.random();
-      var point = maxPoint * randomPoint;
-      var newCircle = new Path.Circle(point, 500);
-      newCircle.fillColor = keyData[event.key].color;
 
-      circles.push(newCircle);
+      keyData[event.key].sound.play();
+
+      if(keyData[event.key].image === 'circle') {
+        var maxPoint = new Point(view.size.width, view.size.height);
+        var randomPoint = Point.random();
+        var point = maxPoint * randomPoint;
+        var newCircle = new Path.Circle(point, 500);
+        newCircle.fillColor = keyData[event.key].color;   
+        circles.push(newCircle);     
+      }
+
+      else if(keyData[event.key].image === 'line') {
+        var maxPoint = new Point(view.size.width, view.size.height);
+        var randomPointFrom = Point.random();
+        var randomPointTo = Point.random();
+        var pointFrom = maxPoint * randomPointFrom;
+        var pointTo = maxPoint * randomPointTo;
+        var newCircle = new Path.Circle(pointFrom, 30);
+        newCircle.fillColor = keyData[event.key].color;
+
+        var lineObj = {
+          dot: newCircle,
+          destination: pointTo,
+          vector: pointTo - pointFrom
+        }
+
+        vertices.push(lineObj);
+      }
     }
-	}
+  }
 
   function onFrame(event){
     for(var i = 0; i < circles.length; i++) {
@@ -192,6 +240,17 @@
         console.log(circles);
       }
     }
+
+    for(var i = 0; i < vertices.length; i++) {
+      vertices[i].dot.hue += 1;
+      vertices[i].dot.position += vertices[i].vector / 10;
+      if(vertices[i].dot.position === vertices[i].destination) {
+        vertices[i].remove();
+        vertices[i].splice(i, 1);
+        console.log(vertices);
+      }
+    }
+
   }
 
 	</script>
